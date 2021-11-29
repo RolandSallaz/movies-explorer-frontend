@@ -6,7 +6,7 @@
   flex-direction: column;
   border-radius: 10px;
 }
-.promo__header {
+.promo__title {
   margin: 160px auto 0;
   font-size: 50px;
   font-weight: 400;

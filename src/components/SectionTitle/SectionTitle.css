@@ -1,0 +1,13 @@
+.section-title {
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid #dadada;
+}
+.section-title__heading {
+  margin: 0;
+  margin-bottom: 23px;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  font-weight: normal;
+}

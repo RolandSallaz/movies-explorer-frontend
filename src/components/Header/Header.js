@@ -2,13 +2,13 @@ import './Header.css';
 
 function Header() {
     return (
-        <div className='header'>
+        <header className='header'>
             <div className='logo__image' />
-            <nav className='header__authMenu'>
-                <a className='header__authLink header__authLink_type_register link' href='/signup'>Регистрация</a>
-                <a className='header__authLink header__authLink_type_login link' href="/signin">Войти</a>
+            <nav className='header__auth-menu'>
+                <a className='header__auth-link header__auth-link_type_register link' href='/signup'>Регистрация</a>
+                <a className='header__auth-link header__auth-link_type_login link' href="/signin">Войти</a>
             </nav>
-        </div>
+        </header>
     )
 }
 export default Header;
