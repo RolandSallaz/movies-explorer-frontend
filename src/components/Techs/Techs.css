@@ -45,3 +45,27 @@
   line-height: 17px;
   letter-spacing: -0.04em;
 }
+@media screen and (max-width: 1279px) {
+  .techs {
+    padding: 90px 0;
+  }
+  .techs__content {
+    max-width: calc(100% - 100px);
+  }
+  .techs__title {
+    margin: 80px auto 22px;
+  }
+  .techs__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .techs-list {
+    margin-top: 83px;
+    grid-template-columns: repeat(auto-fit, 84px);
+    grid-template-rows: 57px;
+  }
+  .techs-list__item {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

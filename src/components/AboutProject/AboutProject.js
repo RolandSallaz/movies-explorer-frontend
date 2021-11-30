@@ -1,4 +1,5 @@
 import SectionTitle from '../SectionTitle/SectionTitle';
+import TimeLine from '../TimeLine/TimeLine';
 import './AboutProject.css';
 function AboutProject() {
     return (
@@ -14,16 +15,7 @@ function AboutProject() {
                     <p className='about-project__subtitle'>У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
                 </article>
             </div>
-            <div className='timeline'>
-                <div className='timeline__container'>
-                    <p className='timeline__period-title timeline__period-title_style_green'>1 неделя</p>
-                    <p className='timeline__tech-title'>Back-end</p>
-                </div>
-                <div className='timeline__container'>
-                    <p className='timeline__period-title'>4 недели</p>
-                    <p className='timeline__tech-title'>Front-end</p>
-                </div>
-            </div>
+            <TimeLine />
         </section>
     );
 }
