@@ -11,7 +11,7 @@ function AboutMe() {
                 <p className='about-me__story'>Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
                     и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
                 </p>
-                <img className='about-me__photo' src={myImagePath}></img>
+                <img className='about-me__photo' src={myImagePath} alt="тут должна быть моя фотография"></img>
                 <nav >
                     <ul className="about-me__links">
                         <li><a href='https://web.facebook.com' className='about-me__link link'>Facebook</a></li>
