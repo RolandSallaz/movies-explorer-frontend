@@ -1,20 +1,20 @@
 .header {
   height: 74px;
-  width: 100%;
+  max-width: calc(100% - 140px);
   display: flex;
   justify-content: space-between;
-  margin: 0;
+  margin: 0 auto;
 }
 .logo__image {
   background-image: url("../../images/logo.svg");
   width: 38px;
   height: 38px;
-  margin: 18px 0 18px 70px;
+  margin: 18px 0 18px;
 }
 .header__auth-menu {
   display: flex;
   align-items: center;
-  margin: auto 70px auto 0;
+  margin: 0;
 }
 .header__auth-link {
   margin: 0;
@@ -40,4 +40,9 @@
   min-width: 76px;
   height: 32px;
   background: none;
+}
+@media screen and (max-width: 1279px) {
+  .header {
+    max-width: calc(100% - 60px);
+  }
 }
