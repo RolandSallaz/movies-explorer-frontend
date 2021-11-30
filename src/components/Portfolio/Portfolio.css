@@ -36,3 +36,17 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+@media screen and (max-width: 1279px) {
+  .portfolio {
+    max-width: calc(100% - 100px);
+  }
+  .portfolio__title {
+    margin-top: 90px;
+  }
+  .portfolio-list {
+    margin: 49px 0 90px;
+  }
+  .portfolio-list__link {
+    font-size: 28px;
+  }
+}
