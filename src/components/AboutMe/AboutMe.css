@@ -1,5 +1,5 @@
 .about-me {
-  margin: 110px auto;
+  margin: 110px auto 0;
   max-width: calc(100% - 140px);
 }
 .about-me__container {
