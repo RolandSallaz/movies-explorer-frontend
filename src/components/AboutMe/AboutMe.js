@@ -14,8 +14,8 @@ function AboutMe() {
                 <img className='about-me__photo' src={myImagePath} alt="тут должна быть моя фотография"></img>
                 <nav >
                     <ul className="about-me__links">
-                        <li><a href='https://vk.com/id117621940' className='about-me__link link' target="_blank">Vk</a></li>
-                        <li><a href="https://github.com/RolandSallaz" className='about-me__link link' target="_blank">Github</a></li>
+                        <li><a href='https://vk.com/id117621940' className='about-me__link link' target="_blank" rel="noreferrer">Vk</a></li>
+                        <li><a href="https://github.com/RolandSallaz" className='about-me__link link' target="_blank" rel="noreferrer">Github</a></li>
                     </ul>
                 </nav>
             </div>
