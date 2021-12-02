@@ -18,6 +18,8 @@
 }
 .header__auth-link {
   margin: 0;
+  margin-left: 30px;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,24 +27,26 @@
   font-weight: 500;
   line-height: 16px;
 }
-.header__auth-link_type_login {
+.header__auth-link_style_green {
   border-radius: 3%;
-  min-width: 76px;
-  height: 32px;
+  width: 54px;
+  height: 26px;
   color: black;
   background-color: #3ddc84;
   font-weight: bold;
   border: none;
 }
-.header__auth-link_type_register {
-  margin-right: 30px;
-  border-radius: 3%;
-  min-width: 76px;
-  height: 32px;
-  background: none;
-}
 @media screen and (max-width: 1279px) {
   .header {
     max-width: calc(100% - 60px);
+  }
+}
+@media screen and (max-width: 767px) {
+  .header {
+    max-width: calc(100% - 28px);
+  }
+  .header__auth-link {
+    font-size: 10px;
+    margin-left: 14px;
   }
 }

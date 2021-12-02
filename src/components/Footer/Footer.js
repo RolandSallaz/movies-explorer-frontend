@@ -10,7 +10,7 @@ function Footer() {
                     <li><a className='footer__link link' href='facebook.com/'>Facebook</a></li>
                 </ul>
             </nav>
-            <p className="footer__copyright ">&copy; 2021</p>
+            <p className="footer__copyright ">&copy;2021</p>
         </footer>
     )
 }

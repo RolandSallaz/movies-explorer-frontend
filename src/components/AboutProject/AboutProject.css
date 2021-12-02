@@ -40,3 +40,23 @@
     line-height: 18px;
   }
 }
+@media screen and (max-width: 767px) {
+  .about-project {
+    max-width: calc(100% - 36px);
+    padding: 70px 0;
+  }
+  .about-project__container {
+    margin: 60px auto;
+    grid-template-columns: 1fr;
+    gap: 57px;
+  }
+  .about-project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .about-project__subtitle {
+    margin-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

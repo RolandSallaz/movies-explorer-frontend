@@ -11,3 +11,10 @@
   letter-spacing: -0.04em;
   font-weight: normal;
 }
+@media screen and (max-width: 767px) {
+  .section-title__heading {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+  }
+}

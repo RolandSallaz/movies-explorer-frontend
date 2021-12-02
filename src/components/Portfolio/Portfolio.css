@@ -39,6 +39,7 @@
   width: 29px;
   height: 52px;
   background-image: url(../../images/portfolio-arrow-min.svg);
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -54,5 +55,30 @@
   }
   .portfolio-list__link {
     font-size: 28px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .portfolio {
+    max-width: calc(100% - 28px);
+  }
+  .portfolio__title {
+    font-size: 14px;
+    margin-top: 69px;
+  }
+  .portfolio-list__link {
+    font-size: 18px;
+    min-height: 47px;
+  }
+  .portfolio-list {
+    margin: 40px 0 70px;
+  }
+  .portfolio-list__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .portfolio-list__link-arrow {
+    margin-right: 4px;
+    width: 12px;
+    height: 27px;
   }
 }

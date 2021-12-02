@@ -14,11 +14,11 @@
 
 .nav-tab__link {
   margin: 0;
+  width: 100%;
   margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 96px;
   height: 36px;
   background-color: #303030;
   border-radius: 10px;
@@ -26,4 +26,14 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+}
+@media screen and (max-width: 767px) {
+  .nav-tab__link-list {
+    grid-template-columns: repeat(auto-fit, 82px);
+    gap: 6px;
+  }
+  .nav-tab__link {
+    height: 26px;
+    font-size: 10px;
+  }
 }
