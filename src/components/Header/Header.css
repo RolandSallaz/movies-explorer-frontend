@@ -1,6 +1,6 @@
 .header {
   height: 74px;
-  max-width: calc(100% - 140px);
+  width: calc(100% - 140px);
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -29,8 +29,8 @@
 }
 .header__auth-link_style_green {
   border-radius: 3%;
-  width: 54px;
-  height: 26px;
+  width: 76px;
+  height: 32px;
   color: black;
   background-color: #3ddc84;
   font-weight: bold;
@@ -38,15 +38,19 @@
 }
 @media screen and (max-width: 1279px) {
   .header {
-    max-width: calc(100% - 60px);
+    width: calc(100% - 60px);
   }
 }
 @media screen and (max-width: 767px) {
   .header {
-    max-width: calc(100% - 28px);
+    width: calc(100% - 28px);
   }
   .header__auth-link {
     font-size: 10px;
     margin-left: 14px;
+  }
+  .header__auth-link_style_green {
+    width: 54px;
+    height: 26px;
   }
 }
