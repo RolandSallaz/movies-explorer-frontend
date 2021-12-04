@@ -1,8 +1,8 @@
-import SearchForm from '../SearchForm/SearchForm';
+import Search from '../Seach/Search';
 import './Movies.css';
 function Movies() {
     return (<main className='movies'>
-        <SearchForm />
+        <Search />
     </main>);
 }
 export default Movies;

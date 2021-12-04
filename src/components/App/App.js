@@ -8,7 +8,7 @@ import Header from '../Header/Header';
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header loggedIn={true} />
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
