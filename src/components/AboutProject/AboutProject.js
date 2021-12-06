@@ -3,7 +3,7 @@ import TimeLine from '../TimeLine/TimeLine';
 import './AboutProject.css';
 function AboutProject() {
     return (
-        <section className='about-project'>
+        <section id='about-project' className='about-project'>
             <SectionTitle>О проекте</SectionTitle>
             <div className='about-project__container'>
                 <article>

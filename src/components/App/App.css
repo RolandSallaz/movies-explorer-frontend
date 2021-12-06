@@ -1,20 +1,7 @@
-@font-face {
-  font-family: "Inter";
-  src: url("../../vendor/fonts/Inter-VariableFont_slnt-wght.ttf")
-    format("opentype");
-}
 .App {
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #202020;
-  color: #ffffff;
-  font-family: "Inter", ‘Arial’, sans-serif;
-}
-.link {
-  text-decoration: none;
-  text-align: center;
-  color: white;
 }

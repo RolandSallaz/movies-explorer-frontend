@@ -1,0 +1,77 @@
+.card {
+  max-width: 364px;
+  border-radius: 6px;
+  background-color: #222222;
+  display: grid;
+  grid-template-areas:
+    "image image"
+    "title like"
+    "duration duration";
+  grid-template-rows: repeat(auto-fit, minmax(1px, min-content));
+}
+.card__image {
+  margin: 0;
+  width: 100%;
+  grid-area: image;
+}
+.card__title {
+  margin: 8px 0 0 16px;
+  max-width: 290px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  grid-area: title;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  align-self: center;
+}
+.card__like {
+  align-self: center;
+  cursor: pointer;
+  margin: 9px 16px 0 auto;
+  width: 30px;
+  height: 30px;
+  grid-area: like;
+  border: none;
+  background: center no-repeat url(../../images/card__like.svg);
+}
+.card__like_liked {
+  background: center no-repeat url(../../images/card__like_liked.svg);
+}
+.card__duration {
+  margin: 11px 0 16px 16px;
+  color: #8b8b8b;
+  font-size: 11px;
+  line-height: 13px;
+  grid-area: duration;
+}
+@media screen and (max-width: 1279px) {
+  .card__title {
+    margin-top: 4px;
+    margin-left: 14px;
+  }
+  .card__like {
+    margin-top: 6px;
+  }
+  .card__duration {
+    margin-top: 8px;
+    margin-left: 14px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .card__like {
+    margin-top: 8px;
+    margin-right: 10px;
+  }
+  .card__title {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 6px;
+  }
+  .card__duration {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 12px;
+  }
+}

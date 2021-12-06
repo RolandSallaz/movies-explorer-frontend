@@ -1,11 +1,18 @@
-@font-face {
-  font-family: "Inter";
-  src: url("./vendor/fonts/Inter-VariableFont_slnt-wght.ttf") format("opentype");
-}
-
+@import url("./vendor/fonts/inter.css");
 body {
   margin: 0;
   background-color: #202020;
   color: #ffffff;
   font-family: "Inter", ‘Arial’, sans-serif;
+}
+button {
+  font-family: "Inter", ‘Arial’, sans-serif;
+}
+.link {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+}
+.active {
+  border-bottom: 2px solid white;
 }

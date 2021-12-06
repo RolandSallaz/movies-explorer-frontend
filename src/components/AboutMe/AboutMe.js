@@ -1,9 +1,10 @@
-import SectionTitle from '../SectionTitle/SectionTitle';
 import './AboutMe.css';
+import SectionTitle from '../SectionTitle/SectionTitle';
 import myImagePath from '../../images/vitalyi.png';
+
 function AboutMe() {
     return (
-        <section className='about-me'>
+        <section id='about-me' className='about-me'>
             <SectionTitle>Студент</SectionTitle>
             <div className='about-me__container'>
                 <h2 className='about-me__name'>Роланд</h2>

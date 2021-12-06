@@ -1,0 +1,38 @@
+.page-404 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.page-404__container {
+  margin: 246px auto auto;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page-404__title {
+  margin: 0;
+  font-weight: normal;
+  font-size: 140px;
+  line-height: 169px;
+  text-align: center;
+}
+.page-404__subtitle {
+  margin: 0;
+  margin-top: 5px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+.page-404__back-button {
+  cursor: pointer;
+  margin: 0;
+  margin-top: 184px;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  background: none;
+  color: #4285f4;
+}

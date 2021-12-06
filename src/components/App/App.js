@@ -1,20 +1,40 @@
 import './App.css';
 import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
 import { Routes, Route } from 'react-router-dom';
 import Movies from '../Movies/Movies';
-import Header from '../Header/Header';
+import SaveMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Propfile/Profile';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import PageNotFound from '../PageNotFound/PageNotFound';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+  const [loading, setLoading] = useState(false);
+  const [editProfile, setEditProfile] = useState(false);
+  const navigate = useNavigate();
+  const handleReturnBackClick = () => {
+    navigate(-1);
+  }
+  const handleLoading = () => {
+    setLoading(true);
+  }
+  const handleEditProfileClick = () => {
+    setEditProfile(true);
+  }
   return (
     <div className="App">
-      <Header loggedIn={true} />
       <Routes>
         <Route exact path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route exact path="/movies" element={<Movies loading={loading} />} />
+        <Route exact path="/saved-movies" element={<SaveMovies />} />
+        <Route path="/profile" element={<Profile editProfile={handleEditProfileClick} />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="*" element={<PageNotFound returnBack={handleReturnBackClick} />} />
       </Routes>
-      <Footer />
-    </div>
+    </div >
   );
 }
 
