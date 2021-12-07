@@ -13,6 +13,9 @@ button {
   text-align: center;
   color: white;
 }
+.link:hover {
+  opacity: 0.5;
+}
 .active {
   border-bottom: 2px solid white;
 }

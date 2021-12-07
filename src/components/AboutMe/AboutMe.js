@@ -1,6 +1,6 @@
 import './AboutMe.css';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import myImagePath from '../../images/vitalyi.png';
+import myImagePath from '../../images/myphoto.jpg';
 
 function AboutMe() {
     return (
@@ -9,8 +9,7 @@ function AboutMe() {
             <div className='about-me__container'>
                 <h2 className='about-me__name'>Роланд</h2>
                 <p className='about-me__subtitle'>Фронтенд-разработчик, 21 год</p>
-                <p className='about-me__story'>Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
-                    и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+                <p className='about-me__story'>Живу в Лен. Области. Я люблю делаю игры на Unity, Пишу сайты и еще увлекаюсь музыкой.
                 </p>
                 <img className='about-me__photo' src={myImagePath} alt="тут должна быть моя фотография"></img>
                 <nav >

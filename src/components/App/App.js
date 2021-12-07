@@ -17,17 +17,17 @@ function App() {
   const handleReturnBackClick = () => {
     navigate(-1);
   }
-  const handleLoading = () => {
-    setLoading(true);
-  }
   const handleEditProfileClick = () => {
     setEditProfile(true);
+  }
+  const handleMoreButtonClick = () => {
+    setLoading(true);
   }
   return (
     <div className="App">
       <Routes>
         <Route exact path="/" element={<Main />} />
-        <Route exact path="/movies" element={<Movies loading={loading} />} />
+        <Route exact path="/movies" element={<Movies onMoreButtonClick={handleMoreButtonClick} loading={loading} />} />
         <Route exact path="/saved-movies" element={<SaveMovies />} />
         <Route path="/profile" element={<Profile editProfile={handleEditProfileClick} />} />
         <Route path="/signup" element={<Register />} />

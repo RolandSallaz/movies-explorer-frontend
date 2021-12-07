@@ -1,6 +1,10 @@
 import './AuthForm.css';
 function AuthForm(props) {
-    return (<form className='auth-form'>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        props.onSubmit();
+    }
+    return (<form className='auth-form' onSubmit={handleSubmit}>
         {props.children}
     </form>);
 }

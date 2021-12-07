@@ -39,6 +39,9 @@
 .card__like_liked {
   background: center no-repeat url(../../images/card__like_liked.svg);
 }
+.card__like_liked:hover {
+  background: center no-repeat url(../../images/card__dislike.svg);
+}
 .card__duration {
   margin: 11px 0 16px 16px;
   color: #8b8b8b;
