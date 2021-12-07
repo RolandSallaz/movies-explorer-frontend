@@ -1,14 +1,14 @@
-import { useState } from 'react/cjs/react.development';
+import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import LogoLink from '../LogoLink/LogoLink';
 import './Register.css';
 function Register() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [nameError, setNameError] = useState(null);
-    const [emailError, setEmailError] = useState(null);
-    const [passwordError, setPasswordError] = useState(null);
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [nameError, setNameError] = React.useState(null);
+    const [emailError, setEmailError] = React.useState(null);
+    const [passwordError, setPasswordError] = React.useState(null);
     const nameHandler = (e) => {
         setName(e.target.value);
         setNameError(e.target.validationMessage);

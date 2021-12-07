@@ -27,9 +27,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route exact path="/" element={<Main />} />
-        <Route exact path="/movies" element={<Movies onMoreButtonClick={handleMoreButtonClick} loading={loading} />} />
-        <Route exact path="/saved-movies" element={<SaveMovies />} />
-        <Route path="/profile" element={<Profile editProfile={handleEditProfileClick} />} />
+        <Route path="/movies" element={<Movies onMoreButtonClick={handleMoreButtonClick} loading={loading} />} />
+        <Route path="/saved-movies" element={<SaveMovies />} />
+        <Route path="/profile" element={<Profile edit={editProfile} editProfile={handleEditProfileClick} />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
         <Route path="*" element={<PageNotFound returnBack={handleReturnBackClick} />} />

@@ -6,11 +6,11 @@ function NavigationMenu(props) {
     const navMenuRef = createRef();
     const handleBackgroundClick = (e) => {
         if (e.target === navMenuRef.current) {
-            props.onClose();
+            props.onMenuClose();
         }
     }
-    const handleCloseMenu = (e) => {
-        props.onClose();
+    const handleCloseMenu = () => {
+        props.onMenuClose();
     }
     return (
         <div className="navigation-menu" ref={navMenuRef} onClick={handleBackgroundClick}>

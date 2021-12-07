@@ -21,7 +21,7 @@
     width: calc(100% - 60px);
   }
   .movies__button-more {
-    margin-top: 78px;
+    margin-top: 80px;
   }
 }
 @media screen and (max-width: 767px) {
@@ -30,6 +30,6 @@
   }
   .movies__button-more {
     width: 240px;
-    margin-top: 70px;
+    margin-top: 73px;
   }
 }

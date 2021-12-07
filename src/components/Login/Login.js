@@ -1,12 +1,12 @@
 import './Login.css';
 import LogoLink from '../LogoLink/LogoLink';
 import AuthForm from '../AuthForm/AuthForm';
-import { useState } from 'react/cjs/react.development';
+import React from 'react';
 function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [emailError, setEmailError] = React.useState('');
+    const [passwordError, setPasswordError] = React.useState('');
     const emailHandler = (e) => {
         setEmail(e.target.value);
         setEmailError(e.target.validationMessage);

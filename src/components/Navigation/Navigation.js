@@ -1,15 +1,15 @@
-import { useState } from 'react/cjs/react.development';
+import React from 'react';
 import AuthLinks from '../AuthLinks/AuthLinks';
 import LogoLink from '../LogoLink/LogoLink';
 import NavigationLinks from '../NavigationLinks/navigation-links';
 import NavigationMenu from '../NavigationMenu/NavigationMenu';
 import './Navigation.css';
 function Navigation(props) {
-    const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
-    const handleNavMenuOpen = () => {
+    const [isNavMenuOpen, setIsNavMenuOpen] = React.useState(false);
+    const handleOpenNavMenu = () => {
         setIsNavMenuOpen(true);
     }
-    const closeNavMenu = (e) => {
+    const handleCloseNavMenu = (e) => {
         setIsNavMenuOpen(false);
     }
     return (
@@ -17,8 +17,12 @@ function Navigation(props) {
             <LogoLink />
             {props.loggedIn ? (<>
                 <NavigationLinks />
-                <button className="navigation__button" onClick={handleNavMenuOpen} />
-                {isNavMenuOpen && <NavigationMenu onClose={closeNavMenu} />}
+                {
+                    isNavMenuOpen ?
+                        <NavigationMenu onMenuClose={handleCloseNavMenu} />
+                        :
+                        <button className="navigation__button" onClick={handleOpenNavMenu} />
+                }
             </>)
                 :
                 <AuthLinks />}
