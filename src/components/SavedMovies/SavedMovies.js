@@ -3,10 +3,10 @@ import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 import Search from '../Seach/Search';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-function SaveMovies() {
+function SavedMovies() {
     return (
         <>
-            <Header loggedIn={true} />
+            <Header />
             <main className="saved-movies">
                 <Search />
                 <MoviesCardList />
@@ -14,4 +14,4 @@ function SaveMovies() {
             <Footer />
         </>);
 }
-export default SaveMovies;
+export default SavedMovies;

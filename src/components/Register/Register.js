@@ -2,7 +2,7 @@ import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import LogoLink from '../LogoLink/LogoLink';
 import './Register.css';
-function Register() {
+function Register(props) {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -22,7 +22,7 @@ function Register() {
         setPasswordError(e.target.validationMessage);
     }
     const handleSubmit = () => {
-
+        props.onSubmit({ name, email, password });
     }
     return (
         <main className='register'>

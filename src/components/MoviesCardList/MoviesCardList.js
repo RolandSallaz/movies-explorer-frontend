@@ -1,20 +1,10 @@
 import Card from '../Card/Card';
 import './MoviesCardList.css';
-function MoviesCardList() {
+function MoviesCardList(props) {
     return (
         <section className='movies-cardList'>
             <ul className='movies-cardList__list'>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
-                <li> <Card /></li>
+                {() => { props.cards.map(card => <Card key={card.id} cardData={card} />); console.log(props.cards) }}
             </ul>
         </section>
     )

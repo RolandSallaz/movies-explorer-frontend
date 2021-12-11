@@ -4,7 +4,7 @@ import './Profile.css';
 function Profile(props) {
     return (
         <>
-            <Header loggedIn={true} />
+            <Header />
             <main className='profile'>
                 <h2 className='profile__name'>Привет, Виталий!</h2>
                 <ProfileForm editProfile={props.editProfile} />

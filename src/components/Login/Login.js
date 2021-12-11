@@ -2,7 +2,7 @@ import './Login.css';
 import LogoLink from '../LogoLink/LogoLink';
 import AuthForm from '../AuthForm/AuthForm';
 import React from 'react';
-function Login() {
+function Login(props) {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [emailError, setEmailError] = React.useState('');
@@ -15,8 +15,8 @@ function Login() {
         setPassword(e.target.value);
         setPasswordError(e.target.validationMessage);
     }
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = () => {
+        props.onSubmit({ email, password });
     }
     return (<main className='login'>
         <LogoLink />

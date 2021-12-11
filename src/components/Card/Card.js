@@ -1,12 +1,12 @@
 import './Card.css';
-import cardImagePath from '../../images/card__image.png';
-function Card() {
+import { filmsUrl } from '../utils/constants';
+function Card(props) {
     return (
         <div className='card'>
-            <img className='card__image' src={cardImagePath} alt='Постер фильма' />
-            <h2 className='card__title'>33 слова о дизайнеdddddddddddddddddddddddddddddddddddd</h2>
+            <a className='card__link' href={props.cardData.trailerLink}><img className='card__image' src={`${filmsUrl}${props.cardData.image.url}`} alt='Постер фильма' /></a>
+            <h2 className='card__title'>{props.cardData.nameRU}</h2>
             <button className='card__like card__like_liked' />
-            <p className='card__duration'>1ч 47м</p>
+            <p className='card__duration'>{`${Math.round(props.cardData.duration / 60)}ч ${props.cardData.duration % 60}м`}</p>
         </div>
     );
 }

@@ -4,8 +4,10 @@ import LogoLink from '../LogoLink/LogoLink';
 import NavigationLinks from '../NavigationLinks/navigation-links';
 import NavigationMenu from '../NavigationMenu/NavigationMenu';
 import './Navigation.css';
+
 function Navigation(props) {
     const [isNavMenuOpen, setIsNavMenuOpen] = React.useState(false);
+    const loggedIn = localStorage.getItem('loggedIn');
     const handleOpenNavMenu = () => {
         setIsNavMenuOpen(true);
     }
@@ -15,7 +17,7 @@ function Navigation(props) {
     return (
         <nav className='navigation'>
             <LogoLink />
-            {props.loggedIn ? (<>
+            {loggedIn ? (<>
                 <NavigationLinks />
                 {
                     isNavMenuOpen ?

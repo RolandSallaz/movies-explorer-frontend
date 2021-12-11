@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import './LogoLink.css';
 function LogoLink() {
     return (
-        <a className='logo-link' href="/"><div className='logo-link__image' /></a>
+        <Link className='logo-link' to="/"><div className='logo-link__image' /></Link>
     );
 }
 export default LogoLink;
