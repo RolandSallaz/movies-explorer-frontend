@@ -3,7 +3,7 @@ import './Search.css';
 function Search(props) {
     return (
         <div className='search'>
-            <SearchForm onFormSubmit={props.onFormSubmit} />
+            <SearchForm onFormSubmit={props.onFormSubmit} checkboxState={props.checkboxState} />
         </div>
     );
 }
