@@ -10,7 +10,7 @@ function ErrorMessage(props) {
         return () => {
             clearTimeout(timerId);
         };
-    }, [props.message]);
+    });
     return (
         <div className={`error-message ${props.message && 'error-message_show'} `} onClick={handleCloseMessage}>
             <h2 className='error-message__title'>{props.message}</h2>

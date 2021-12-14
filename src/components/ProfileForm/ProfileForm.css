@@ -27,21 +27,17 @@
   width: 100%;
   font-size: 11px;
   line-height: 13px;
-  background-color: #2f2f2f;
+  background: none;
   border-radius: 8px;
   border: none;
   text-align: center;
   color: white;
+  text-align: end;
 }
 .profile-form__input-title {
   margin: 0;
   min-width: 50px;
   font-weight: 500;
-  font-size: 11px;
-  line-height: 13px;
-}
-.profile-form__input-value {
-  margin: 0;
   font-size: 11px;
   line-height: 13px;
 }
@@ -59,6 +55,10 @@
   font-weight: normal;
   color: #ffffff;
   cursor: pointer;
+}
+.profile-form__button:disabled {
+  cursor: default;
+  color: #424242;
 }
 .profile-form__button_type_logout {
   color: #ee3465;

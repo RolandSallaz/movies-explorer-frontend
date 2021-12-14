@@ -34,5 +34,5 @@ function SearchForm(props) {
         </div>
         <span className='search-form__error'>{filmsError}</span>
     </form>)
-}//ПЕРЕНЕСТИ ЛОГИКУ СМЕНЫ ЧЕКБОКСА
+}
 export default SearchForm;

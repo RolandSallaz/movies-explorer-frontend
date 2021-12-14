@@ -1,51 +1,58 @@
 import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import LogoLink from '../LogoLink/LogoLink';
+import validation from '../utils/Validation';
 import './Register.css';
+
 function Register(props) {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [nameError, setNameError] = React.useState(null);
-    const [emailError, setEmailError] = React.useState(null);
-    const [passwordError, setPasswordError] = React.useState(null);
+    const [errors, setErrors] = React.useState({});
     const nameHandler = (e) => {
         setName(e.target.value);
-        setNameError(e.target.validationMessage);
+        validation.validateName(e);
     }
     const emailHandler = (e) => {
         setEmail(e.target.value);
-        setEmailError(e.target.validationMessage);
+        validation.validateMail(e);
     }
     const passwordHandler = (e) => {
         setPassword(e.target.value);
-        setPasswordError(e.target.validationMessage);
     }
-    const handleSubmit = () => {
+    const submitHandler = () => {
         props.onSubmit({ name, email, password });
+    }
+    const errorHandler = (e) => {
+        setErrors(e);
     }
     return (
         <main className='register'>
             <LogoLink />
-            <AuthForm onSubmit={handleSubmit}>
-                <h2 className='auth-form__title'>Добро пожаловать!</h2>
+            <AuthForm config={{
+                title: "Добро Пожаловать!",
+                buttonTitle: 'Зарегистрироваться',
+                bottomText: 'Уже зарегистрированы?',
+                bottomLink: { link: '/signin', text: 'Войти' }
+            }}
+                onSubmit={submitHandler}
+                onErrors={errorHandler}
+            >
                 <label className='auth-form__label'>
                     <span className='auth-form__label-title'>Имя</span>
-                    <input type='text' value={name} onChange={nameHandler} className={`auth-form__input ${nameError && 'auth-form__input_error'}`} minLength={2} required></input>
-                    <span className='auth-form__error'>{nameError}</span>
+                    <input type='text' name='name' value={name} onChange={nameHandler} className={`auth-form__input ${errors.name && 'auth-form__input_error'}`} required></input>
+                    <span className='auth-form__error'>{errors.name}</span>
                 </label>
                 <label className='auth-form__label'>
                     <span className='auth-form__label-title'>E-mail</span>
-                    <input type='email' value={email} onChange={emailHandler} className={`auth-form__input ${emailError && 'auth-form__input_error'}`} required></input>
-                    <span className='auth-form__error'>{emailError}</span>
+                    <input type='email' name='email' value={email} onChange={emailHandler} className={`auth-form__input ${errors.email && 'auth-form__input_error'}`} required></input>
+                    <span className='auth-form__error'>{errors.email}</span>
                 </label>
                 <label className='auth-form__label'>
                     <span className='auth-form__label-title'>Пароль</span>
-                    <input type='password' value={password} onChange={passwordHandler} className={`auth-form__input ${passwordError && 'auth-form__input_error'}`} minLength={8} required></input>
-                    <span className='auth-form__error'>{passwordError}</span>
+                    <input type='password' name='password' value={password} onChange={passwordHandler} className={`auth-form__input ${errors.password && 'auth-form__input_error'}`} required></input>
+                    <span className='auth-form__error'>{errors.password}</span>
                 </label>
-                <button type='submit' className='auth-form__submit-button'>Зарегистрироваться</button>
-                <p className='auth-form__bottom-paragraph'>Уже зарегистрированы?<a className='auth-form__link link' href='/signin'> Войти</a></p>
             </AuthForm>
 
         </main>

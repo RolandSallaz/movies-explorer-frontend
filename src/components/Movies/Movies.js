@@ -11,11 +11,11 @@ function Movies(props) {
             <Header />
             <main className='movies'>
                 <Search onFormSubmit={props.onFormSubmit} checkboxState={props.checkboxState} />
-                <MoviesCardList filteredMovies={props.filteredMovies} />
+                <MoviesCardList movies={props.movies} onLikeClick={props.onCardLike} />
                 {props.loading ? <Preloader /> : (
 
                     <>
-                        {props.filteredMovies.length !== props.cards.length &&
+                        {props.movies.length !== props.cards.length &&
                             <button className='movies__button-more' onClick={props.onMoreButtonClick}>Ещё</button>
                         }
                         {props.filmsNotFound && <FilmsNotFound />}
