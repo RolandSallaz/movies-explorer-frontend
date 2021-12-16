@@ -82,6 +82,9 @@ function App() {
         if (err instanceof TypeError) {
           return errorHandler('Слишком много запросов');
         }
+        if (err === 401) {
+          return console.log("Необходима авторизация");
+        }
         localStorage.setItem('loggedIn', '');
         return errorHandler(err);
       });
