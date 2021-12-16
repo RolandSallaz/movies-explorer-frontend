@@ -6,6 +6,7 @@ function MoviesCardList(props) {
             <ul className='movies-cardList__list'>
                 {props.movies.map(card => <Card key={card.id}
                     cardData={card}
+                    liked={card.liked}
                     onLikeClick={props.onLikeClick} />)}
             </ul>
         </section>

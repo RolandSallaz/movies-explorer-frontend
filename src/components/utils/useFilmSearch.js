@@ -1,6 +1,6 @@
 export function useFilmSearch() {
     const search = ({ moviesArray, movieData }) => {
-        moviesArray.map(movie => {
+        const filteredArray = moviesArray.filter(movie => {
             if (movie.nameRU.toLowerCase().includes(movieData.filmName.toLowerCase())) {
                 if (!movieData.shortFilms && movie.description >= 40) {
                     return true;
@@ -9,7 +9,7 @@ export function useFilmSearch() {
             }
             return false;
         });
-        return moviesArray;
+        return filteredArray;
     }
     return { search }
 }

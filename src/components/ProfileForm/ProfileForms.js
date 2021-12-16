@@ -48,11 +48,11 @@ function ProfileForm(props) {
             <div className='profile-form__container'>
                 <label className='profile-form__label profile-form__label_border_bottom'>
                     <span className='profile-form__input-title'>Имя</span>
-                    <input className={`profile-form__input ${formValidation.errors.name && 'profile-form__input_error'}`} type='text' name='name' placeholder='имя' value={name} onChange={nameHandler} minLength={2} required />
+                    <input className={`profile-form__input ${formValidation.errors.name && 'profile-form__input_error'}`} type='text' name='name' placeholder='имя' value={name || ''} onChange={nameHandler} minLength={2} required />
                 </label>
                 <label className='profile-form__label'>
                     <span className='profile-form__input-title'>E-mail</span>
-                    <input className={`profile-form__input ${formValidation.errors.email && 'profile-form__input_error'}`} type='email' name='email' placeholder='pochta@yandex.ru' value={email} onChange={emailHandler} required />
+                    <input className={`profile-form__input ${formValidation.errors.email && 'profile-form__input_error'}`} type='email' name='email' placeholder='pochta@yandex.ru' value={email || ''} onChange={emailHandler} required />
                 </label>
             </div>
             <button className='profile-form__button' type='submit' disabled={disableSubmit}>Редактировать</button>

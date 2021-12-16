@@ -6,7 +6,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
         console.log(false);
     }
     return (
-        loggedIn ? <Component {...props} /> : <Navigate to="/signin" />
+        loggedIn ? <Component {...props} /> : <Navigate to="/" />
     )
 }
 
