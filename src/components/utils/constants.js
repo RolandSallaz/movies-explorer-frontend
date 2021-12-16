@@ -1,4 +1,4 @@
-const apiUrl = 'http://127.0.0.1:3000';
+const apiUrl = 'https://api.diploma.roland.nomoredomains.work';
 const filmsUrl = 'https://api.nomoreparties.co';
 const emailConflictError = "Данный e-mail уже используется";
 const logginError = 'Неправильные e-mail или пароль';
