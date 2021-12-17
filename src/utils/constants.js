@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000';
+const apiUrl = 'https://api.diploma.roland.nomoredomains.work';
 const filmsUrl = 'https://api.nomoreparties.co';
 const shortFilmDuration = 40;
 const initialMoviesPc = 12;
