@@ -1,5 +1,5 @@
 import './Card.css';
-import { filmsUrl } from '../utils/constants';
+import { filmsUrl } from '../../utils/constants';
 import { useState, useEffect } from 'react';
 function Card(props) {
     const [like, setLike] = useState(false);

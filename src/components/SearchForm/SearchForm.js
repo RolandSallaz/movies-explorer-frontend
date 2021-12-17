@@ -3,25 +3,32 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 function SearchForm(props) {
     const [filmName, setFilmName] = useState('');
-    const [shortFilms, setShortFilms] = useState(true);
+    const [shortFilms, setShortFilms] = useState(false);
 
     const handleFilterChange = () => {
+        localStorage.setItem('lastCheckboxState', !shortFilms);
         setShortFilms(!shortFilms);
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        props.onFormSubmit({ filmName, shortFilms })
+        props.onFormSubmit(filmName)
     }
 
     const filmNameHanlder = (e) => {
         setFilmName(e.target.value);
     }
+
     useEffect(() => {
-        if (props.checkboxState != null) {
-            setShortFilms(props.checkboxState.shortFilms);
+        props.onCheckboxChange(shortFilms);
+    }, [shortFilms]);
+
+    useEffect(() => {
+        if (localStorage.getItem('lastCheckboxState')) {
+            setShortFilms(JSON.parse(localStorage.getItem('lastCheckboxState')));
         }
-    }, [props.checkboxState]);
+    }, []);
+
     return (<form className='search-form' onSubmit={submitHandler}>
         <div className='search-form__search-container'>
             <input placeholder='Фильм' onChange={filmNameHanlder} type='text' name='filmSearch' className='search-form__input'></input>

@@ -2,7 +2,7 @@ import './Login.css';
 import LogoLink from '../LogoLink/LogoLink';
 import AuthForm from '../AuthForm/AuthForm';
 import React from 'react';
-import validation from '../utils/Validation';
+import validation from '../../utils/Validation';
 
 function Login(props) {
     const [email, setEmail] = React.useState('');

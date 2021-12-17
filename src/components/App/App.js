@@ -10,15 +10,16 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import mainApi from '../utils/MainApi';
+import mainApi from '../../utils/MainApi';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { emailConflictError, logginError } from '../utils/constants';
+import { emailConflictError, filmsUrl, logginError } from '../../utils/constants';
 import CurrentUserContext from '../../contexts/currentUserContext';
+import moviesApi from '../../utils/MoviesApi';
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('');
   const [errorText, setErrorText] = useState('');
-
+  const [films, setFilms] = useState([]);
   const handleReturnBackClick = () => {
     navigate(-1);
   }
@@ -56,7 +57,7 @@ function App() {
     return mainApi.logOut()
       .then(res => {
         localStorage.setItem('movies', '');
-        return navigate('/signin', { replace: true });
+        return navigate('/', { replace: true });
       })
       .catch(err => errorHandler(err));
   }
@@ -74,7 +75,18 @@ function App() {
         return errorHandler(err);
       })
   }
-
+  useEffect(() => {
+    return moviesApi.getMovies()
+      .then(res => {
+        const filteredArray = res;
+        filteredArray.forEach(movie => {
+          movie.duration <= 40
+            ? movie.shortFilm = true
+            : movie.shortFilm = false
+        })
+        setFilms(filteredArray);
+      })
+  }, []);
   useEffect(() => { // check auth
     return mainApi.getCurrentUser()
       .then(res => setCurrentUser(res))
@@ -97,6 +109,7 @@ function App() {
           <Route exact path="/" element={<Main />} />
           <Route path="/movies" element={<ProtectedRoute
             component={Movies}
+            initialMovies={films}
             onError={errorHandler}
           />} />
           <Route path="saved-movies" element={<ProtectedRoute
@@ -108,8 +121,12 @@ function App() {
             onLogOut={handleLogOut}
             onSubmit={handleUpdateUser} />}
           />
-          <Route path="/signup" element={<Register onSubmit={handleRegister} />} />
-          <Route path="/signin" element={<Login onSubmit={handleLogin} />} />
+          {!currentUser &&
+            < Route path="/signup" element={<Register onSubmit={handleRegister} />} />
+          }
+          {!currentUser &&
+            < Route path="/signin" element={<Login onSubmit={handleLogin} />} />
+          }
           <Route path="*" element={<PageNotFound returnBack={handleReturnBackClick} />} />
         </Routes>
       </CurrentUserContext.Provider>

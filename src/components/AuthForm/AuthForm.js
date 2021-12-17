@@ -1,7 +1,7 @@
 import './AuthForm.css';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useFormWithValidation } from '../utils/useFormWithValidation';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
 function AuthForm(props) {
     const formValidation = useFormWithValidation();
 

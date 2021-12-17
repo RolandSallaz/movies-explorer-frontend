@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { addCards, addCardsPc, initialMoviesMobile, initialMoviesPc, initialMoviesTablet } from './constants';
 export function useResolution() {
     const [width, setWidth] = useState(0);
     const [startCardsCount, setStartCardsCount] = useState(0);
@@ -12,13 +13,13 @@ export function useResolution() {
 
     useEffect(() => {
         if (width >= 1280) {
-            return (setStartCardsCount(12), setAdditionalCards(3));
+            return (setStartCardsCount(initialMoviesPc), setAdditionalCards(addCardsPc));
         }
         else if (width >= 768) {
-            return (setStartCardsCount(8), setAdditionalCards(2));
+            return (setStartCardsCount(initialMoviesTablet), setAdditionalCards(addCards));
         }
         else {
-            return (setStartCardsCount(5), setAdditionalCards(2));
+            return (setStartCardsCount(initialMoviesMobile), setAdditionalCards(addCards));
         }
     }, [width]);
 

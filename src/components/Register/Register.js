@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 import LogoLink from '../LogoLink/LogoLink';
-import validation from '../utils/Validation';
+import validation from '../../utils/Validation';
 import './Register.css';
 
 function Register(props) {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useFormWithValidation } from '../utils/useFormWithValidation';
-import validation from '../utils/Validation';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
+import validation from '../../utils/Validation';
 
 import './ProfileForm.css';
 function ProfileForm(props) {

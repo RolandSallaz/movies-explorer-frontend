@@ -5,43 +5,41 @@ import Preloader from '../Preloader/Preloader';
 import Search from '../Seach/Search';
 import FilmsNotFound from '../FilmsNotFound/FilmsNotFound';
 import './Movies.css';
-import { useState, useEffect, useCallback } from 'react';
-import { useResolution } from '../utils/useRosolution';
-import moviesApi from '../utils/MoviesApi';
-import { loadginCardsError } from '../utils/constants';
-import { useFilmSearch } from '../utils/useFilmSearch';
-import mainApi from '../utils/MainApi';
+import { useState, useEffect } from 'react';
+import { useResolution } from '../../utils/useRosolution';
+import { useFilmSearch } from '../../utils/useFilmSearch';
+import mainApi from '../../utils/MainApi';
+import { shortFilmDuration } from '../../utils/constants';
 function Movies(props) {
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [moviesCount, setMoviesCount] = useState(0);
-    const [lastFilmsSearch, setLastFilmsSerach] = useState(null);
+    const [shortFilms, setShortFilms] = useState(false);
     const [loading, setLoading] = useState(false);
     const [filmsNotFound, setFilmsNotFound] = useState(false);
 
     const resolution = useResolution();
     const filmSearch = useFilmSearch();
 
-    const handleMoreButtonClick = () => {
-        return setMoviesCount(moviesCount + resolution.additionalCards);
+    const handleMoreButtonClick = () => {//
+        setMoviesCount(moviesCount + resolution.additionalCards);
     }
-    const handleSearchFilms = (movieData) => {
+    const handleCheckboxClick = (state) => {
+        setShortFilms(state);
+    }
+
+
+    const handleSearchFilms = (movieName) => {
         setLoading(true);
-        return moviesApi.getMovies()
-            .then(res => {
-                if (res.length === 0) {
-                    setFilmsNotFound(true);
-                }
-                movieData.filmName.length === 0
-                    ? setMovies(res)
-                    : setMovies(filmSearch.search({ moviesArray: res, movieData }));
-                localStorage.setItem('lastFind', JSON.stringify(movieData));
-            })
-            .catch(() => props.onError(loadginCardsError)
-            )
-            .finally(() => {
-                return setLoading(false)
-            });
+        let filteredArray = [];
+        movieName.length === 0
+            ? filteredArray = props.initialMovies
+            : filteredArray = filmSearch.search({ moviesArray: props.initialMovies, movieName });
+        if (filteredArray.length === 0) {
+            setFilmsNotFound(true);
+        }
+        setMovies(filteredArray);
+        return setLoading(false)
     }
     const handleCardLikeClick = (card) => {
         const cardsArray = filteredMovies;
@@ -74,11 +72,14 @@ function Movies(props) {
     }
 
     useEffect(() => {
-        setMoviesCount(resolution.startCardsCount);
+        let filteredArray = [];
+        !shortFilms
+            ? filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration)
+            : filteredArray = movies;
         if (movies) {
-            setFilteredMovies(movies.slice(0, moviesCount));
+            setFilteredMovies(filteredArray.slice(0, moviesCount));
         }
-    }, [movies, moviesCount, resolution.startCardsCount, resolution.width]);
+    }, [movies, moviesCount, resolution.width, shortFilms]);
 
     useEffect(() => {
         if (movies.length >= 1) {
@@ -88,21 +89,21 @@ function Movies(props) {
     }, [movies]);
 
     useEffect(() => {
+        setMoviesCount(resolution.startCardsCount);
         if (localStorage.getItem('movies')) {
             setMovies(JSON.parse(localStorage.getItem('movies')));
         }
-        setLastFilmsSerach(JSON.parse(localStorage.getItem('lastFind')));
     }, []);
 
     return (
         <>
             <Header />
             <main className='movies'>
-                <Search onFormSubmit={handleSearchFilms} checkboxState={lastFilmsSearch} />
+                <Search onFormSubmit={handleSearchFilms} onCheckboxChange={handleCheckboxClick} />
                 <MoviesCardList movies={filteredMovies} onLikeClick={handleCardLikeClick} />
                 {loading ? <Preloader /> : (
                     <>
-                        {movies.length !== filteredMovies.length &&
+                        {moviesCount <= filteredMovies.length &&
                             <button className='movies__button-more' onClick={handleMoreButtonClick}>Ещё</button>
                         }
                         {filmsNotFound && <FilmsNotFound />}
