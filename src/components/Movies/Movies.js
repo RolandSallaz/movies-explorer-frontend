@@ -103,7 +103,7 @@ function Movies(props) {
                 <MoviesCardList movies={filteredMovies} onLikeClick={handleCardLikeClick} />
                 {loading ? <Preloader /> : (
                     <>
-                        {moviesCount <= filteredMovies.length &&
+                        {moviesCount <= filteredMovies.length && filteredMovies.length>=1&&
                             <button className='movies__button-more' onClick={handleMoreButtonClick}>Ещё</button>
                         }
                         {filmsNotFound && <FilmsNotFound />}
