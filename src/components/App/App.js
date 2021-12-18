@@ -12,7 +12,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { emailConflictError, filmsUrl, logginError } from '../../utils/constants';
+import { emailConflictError, logginError } from '../../utils/constants';
 import CurrentUserContext from '../../contexts/currentUserContext';
 import moviesApi from '../../utils/MoviesApi';
 function App() {

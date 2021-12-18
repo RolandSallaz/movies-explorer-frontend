@@ -24,6 +24,7 @@ export function useResolution() {
     }, [width]);
 
     useEffect(() => {
+        setWidth(window.screen.width);
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);

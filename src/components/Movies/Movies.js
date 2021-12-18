@@ -21,13 +21,12 @@ function Movies(props) {
     const resolution = useResolution();
     const filmSearch = useFilmSearch();
 
-    const handleMoreButtonClick = () => {//
+    const handleMoreButtonClick = () => {
         setMoviesCount(moviesCount + resolution.additionalCards);
     }
     const handleCheckboxClick = (state) => {
         setShortFilms(state);
     }
-
 
     const handleSearchFilms = (movieName) => {
         setLoading(true);
@@ -73,9 +72,9 @@ function Movies(props) {
 
     useEffect(() => {
         let filteredArray = [];
-        !shortFilms
-            ? filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration)
-            : filteredArray = movies;
+        shortFilms
+        ? filteredArray = movies
+        : filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration);
         if (movies) {
             setFilteredMovies(filteredArray.slice(0, moviesCount));
         }
@@ -90,6 +89,8 @@ function Movies(props) {
 
     useEffect(() => {
         setMoviesCount(resolution.startCardsCount);
+    }, [resolution.startCardsCount]);
+    useEffect(() => {
         if (localStorage.getItem('movies')) {
             setMovies(JSON.parse(localStorage.getItem('movies')));
         }
