@@ -10,7 +10,7 @@ function Profile(props) {
             <Header />
             <main className='profile'>
                 <h2 className='profile__name'>{`Привет, ${currentUser && currentUser.name}!`}</h2>
-                <ProfileForm user={currentUser} onSubmit={props.onSubmit} onLogOut={props.onLogOut} />
+                <ProfileForm user={currentUser} disableProfile={props.disableProfile} onSubmit={props.onSubmit} onLogOut={props.onLogOut} />
             </main>
         </>);
 }

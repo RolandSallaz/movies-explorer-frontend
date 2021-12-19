@@ -11,40 +11,67 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import mainApi from '../../utils/MainApi';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { emailConflictError, logginError } from '../../utils/constants';
+import { Navigate } from "react-router-dom";
+import {
+  emailConflictError,
+  logginError,
+  succesUpdateUserMessage,
+  loadingCardsError,
+  tooManyRequestsError,
+  authError
+} from '../../utils/constants';
 import CurrentUserContext from '../../contexts/currentUserContext';
 import moviesApi from '../../utils/MoviesApi';
+import InfoTool from '../InfoTool/InfoTool';
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState('');
-  const [errorText, setErrorText] = useState('');
+  const [InfoMessage, setInfoMessage] = useState({});
   const [films, setFilms] = useState([]);
+  const [disableProfileSubmit,setDisableProfileSubmit] = useState(false);
+
   const handleReturnBackClick = () => {
     navigate(-1);
   }
 
-  const handleCloseError = () => {
-    setErrorText('');
+  const handleCloseMessage = () => {
+    setInfoMessage({});
   }
+
   const errorHandler = (err) => {
-    setErrorText(err.toString());
+    if (err === 'failed to fetch') {
+      return err(loadingCardsError);
+    }
+    if (err === 401) {
+      return console.log(authError);
+    }
+    return setInfoMessage({ text: err.toString(), error: true });
   }
+
+  const messageHandler = (message) => {
+    setInfoMessage({ text: message });
+  }
+
   const handleUpdateUser = ({ name, email }) => {
+    setDisableProfileSubmit(true);
     return mainApi.updateUser({ name, email })
-      .then(res => setCurrentUser(res))
+      .then(res => {
+        setCurrentUser(res);
+        messageHandler(succesUpdateUserMessage);
+      })
       .catch(err => errorHandler(
         err.message
           ? err.message
           : err
-      ));
+      ))
+      .finally(()=>{
+        setDisableProfileSubmit(false);
+      });
   }
 
   const handleRegister = ({ email, name, password }) => {
     return mainApi.register({ email, password, name })
-      .then(res => {
-        return navigate('/signin', { replace: true });
-      })
+      .then(() => handleLogin({ email, password }))
       .catch(err => {
         if (err === 409) {
           return errorHandler(emailConflictError);
@@ -55,9 +82,12 @@ function App() {
 
   const handleLogOut = () => {
     return mainApi.logOut()
-      .then(res => {
+      .then(() => {
+        navigate('/', { replace: true });
+        localStorage.setItem('loggedIn', false);
         localStorage.setItem('movies', '');
-        return navigate('/', { replace: true });
+        return setCurrentUser(null);
+
       })
       .catch(err => errorHandler(err));
   }
@@ -75,27 +105,27 @@ function App() {
         return errorHandler(err);
       })
   }
+
   useEffect(() => {
-    return moviesApi.getMovies()
-      .then(res => {
-        const filteredArray = res;
-        filteredArray.forEach(movie => {
-          movie.duration <= 40
-            ? movie.shortFilm = true
-            : movie.shortFilm = false
-        })
-        setFilms(filteredArray);
-      })
+    moviesApi.getMovies()
+      .then(res => setFilms(res))
+      .catch(err => { errorHandler(err) });
   }, []);
+
+
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('loggedIn', true);
+    }
+  }, [currentUser]);
+
   useEffect(() => { // check auth
     return mainApi.getCurrentUser()
       .then(res => setCurrentUser(res))
       .catch(err => {
         if (err instanceof TypeError) {
-          return errorHandler('Слишком много запросов');
-        }
-        if (err === 401) {
-          return console.log("Необходима авторизация");
+          return errorHandler(tooManyRequestsError);
         }
         localStorage.setItem('loggedIn', '');
         return errorHandler(err);
@@ -119,18 +149,25 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute
             component={Profile}
             onLogOut={handleLogOut}
-            onSubmit={handleUpdateUser} />}
+            onError={errorHandler}
+            onSubmit={handleUpdateUser}
+            disableProfile={disableProfileSubmit} 
+            />}
           />
-          {!currentUser &&
-            < Route path="/signup" element={<Register onSubmit={handleRegister} />} />
-          }
-          {!currentUser &&
-            < Route path="/signin" element={<Login onSubmit={handleLogin} />} />
-          }
+          < Route path="/signup" element={
+            currentUser
+              ? <Navigate to="/" />
+              : <Register onSubmit={handleRegister} />
+          } />
+          < Route path="/signin" element={
+            currentUser
+              ? <Navigate to="/" />
+              : <Login onSubmit={handleLogin} />
+          } />
           <Route path="*" element={<PageNotFound returnBack={handleReturnBackClick} />} />
         </Routes>
       </CurrentUserContext.Provider>
-      <ErrorMessage message={errorText} onCloseClick={handleCloseError} />
+      <InfoTool message={InfoMessage} onCloseClick={handleCloseMessage} />
     </div >
   );
 }

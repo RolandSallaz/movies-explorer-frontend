@@ -5,13 +5,16 @@ import Preloader from '../Preloader/Preloader';
 import Search from '../Seach/Search';
 import FilmsNotFound from '../FilmsNotFound/FilmsNotFound';
 import './Movies.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useResolution } from '../../utils/useRosolution';
 import { useFilmSearch } from '../../utils/useFilmSearch';
 import mainApi from '../../utils/MainApi';
 import { shortFilmDuration } from '../../utils/constants';
+import CurrentUserContext from '../../contexts/currentUserContext';
 function Movies(props) {
+    const currentUser = useContext(CurrentUserContext);
     const [movies, setMovies] = useState([]);
+    const [savedMovies, setSavedMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [moviesCount, setMoviesCount] = useState(0);
     const [shortFilms, setShortFilms] = useState(false);
@@ -24,6 +27,7 @@ function Movies(props) {
     const handleMoreButtonClick = () => {
         setMoviesCount(moviesCount + resolution.additionalCards);
     }
+
     const handleCheckboxClick = (state) => {
         setShortFilms(state);
     }
@@ -41,10 +45,10 @@ function Movies(props) {
         return setLoading(false)
     }
     const handleCardLikeClick = (card) => {
-        const cardsArray = filteredMovies;
         if (!card.liked) {
             mainApi.saveCard(card)
                 .then(res => {
+                    const cardsArray = filteredMovies;
                     cardsArray.forEach(movie => {
                         if (movie.id === res.movieId) {
                             card._id = res._id;
@@ -52,36 +56,31 @@ function Movies(props) {
                             movie.liked = card.liked;
                         }
                     })
+                    setMovies(cardsArray);
                 })
                 .catch(err => props.onError(err));
         }
-        else {
-            mainApi.deleteCard(card._id)
-                .then(res => {
-                    cardsArray.forEach(movie => {
-                        if (movie.id === res.movieId) {
-                            movie.liked = card.liked;
-                            card._id = null;
-                        }
-                    })
-                })
-                .catch(err => props.onError(err));
-        }
-        setMovies(cardsArray);
     }
 
     useEffect(() => {
         let filteredArray = [];
         shortFilms
-        ? filteredArray = movies
-        : filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration);
+            ? filteredArray = movies
+            : filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration);
         if (movies) {
+            filteredArray.forEach((movie) => {
+                savedMovies.forEach((savedMovie) => {
+                    if (movie.id === savedMovie.movieId && savedMovie.owner === currentUser.id) {
+                        movie.liked = true;
+                    }
+                })
+            })
             setFilteredMovies(filteredArray.slice(0, moviesCount));
         }
-    }, [movies, moviesCount, resolution.width, shortFilms]);
+    }, [movies, moviesCount, resolution.width, shortFilms, savedMovies]);
 
     useEffect(() => {
-        if (movies.length >= 1) {
+        if (movies.length !== 0) {
             setFilmsNotFound(false);
             localStorage.setItem('movies', JSON.stringify(movies))
         }
@@ -90,7 +89,12 @@ function Movies(props) {
     useEffect(() => {
         setMoviesCount(resolution.startCardsCount);
     }, [resolution.startCardsCount]);
+
     useEffect(() => {
+        mainApi.getMovies()
+            .then(res => setSavedMovies(res))
+            .catch(err => props.onError(err));
+
         if (localStorage.getItem('movies')) {
             setMovies(JSON.parse(localStorage.getItem('movies')));
         }
@@ -104,7 +108,7 @@ function Movies(props) {
                 <MoviesCardList movies={filteredMovies} onLikeClick={handleCardLikeClick} />
                 {loading ? <Preloader /> : (
                     <>
-                        {moviesCount <= filteredMovies.length && filteredMovies.length>=1&&
+                        {moviesCount < movies.length && filteredMovies.length !== 0 &&
                             <button className='movies__button-more' onClick={handleMoreButtonClick}>Ещё</button>
                         }
                         {filmsNotFound && <FilmsNotFound />}

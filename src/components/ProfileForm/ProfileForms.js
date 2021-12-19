@@ -55,7 +55,7 @@ function ProfileForm(props) {
                     <input className={`profile-form__input ${formValidation.errors.email && 'profile-form__input_error'}`} type='email' name='email' placeholder='pochta@yandex.ru' value={email || ''} onChange={emailHandler} required />
                 </label>
             </div>
-            <button className='profile-form__button' type='submit' disabled={disableSubmit}>Редактировать</button>
+            <button className='profile-form__button' type='submit' disabled={disableSubmit||props.disableProfile}>Редактировать</button>
             <button className='profile-form__button profile-form__button_type_logout' onClick={handleLogOutClick}>Выйти из аккаунта</button>
         </form>
     );
