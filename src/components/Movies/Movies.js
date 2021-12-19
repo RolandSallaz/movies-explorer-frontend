@@ -75,21 +75,14 @@ function Movies(props) {
     }
 
     useEffect(() => {
+        let filteredArray = [];
         shortFilms
             ? filteredArray = movies
             : filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration);
         if (movies) {
-            filteredArray.forEach((movie) => {
-                savedMovies.forEach((savedMovie) => {
-                    if (movie.id === savedMovie.movieId && savedMovie.owner === currentUser.id) {
-                        movie._id=savedMovie._id;
-                        movie.liked = true;
-                    }
-                })
-            })
             setFilteredMovies(filteredArray.slice(0, moviesCount));
         }
-    }, [movies, moviesCount, resolution.width, shortFilms, savedMovies]);
+    }, [movies, moviesCount, resolution.width, shortFilms]);
 
     useEffect(() => {
         if (movies.length !== 0) {
@@ -104,12 +97,30 @@ function Movies(props) {
 
     useEffect(() => {
         mainApi.getMovies()
-            .then(res => setSavedMovies(res))
+            .then(res => {
+                if (localStorage.getItem('movies')) {
+                    const localMoviesArray=JSON.parse(localStorage.getItem('movies'))
+                    localMoviesArray.forEach((movie) => {
+                        res.forEach((savedMovie) => {
+                            if (movie.id === savedMovie.movieId && savedMovie.owner === currentUser.id) {
+                                movie._id = savedMovie._id;
+                                movie.liked = true;
+                            }
+                        })
+                    })
+                    setMovies(localMoviesArray);
+                }
+
+
+
+
+
+            }
+
+                )
             .catch(err => props.onError(err));
 
-        if (localStorage.getItem('movies')) {
-            setMovies(JSON.parse(localStorage.getItem('movies')));
-        }
+
     }, []);
 
     return (
