@@ -84,6 +84,7 @@ function App() {
     return mainApi.logOut()
       .then(() => {
         navigate('/', { replace: true });
+        localStorage.setItem('lastUserId','');
         localStorage.setItem('loggedIn', false);
         localStorage.setItem('movies', '');
         return setCurrentUser(null);
@@ -116,6 +117,7 @@ function App() {
 
   useEffect(() => {
     if (currentUser) {
+      localStorage.setItem('lastUserId',currentUser.id);
       localStorage.setItem('loggedIn', true);
     }
   }, [currentUser]);

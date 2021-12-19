@@ -63,31 +63,30 @@ function SavedMovies(props) {
     useEffect(() => {
         setFilteredMovies(movies);
         movies.length !== 0 && setFilmsNotFound(false)
-        
+
     }, [movies]);
 
-useEffect(()=>{
-    filteredMovies.length===0 && setFilmsNotFound(true);
-},[filteredMovies]);
+    useEffect(() => {
+        filteredMovies.length === 0 && setFilmsNotFound(true);
+    }, [filteredMovies]);
 
     useEffect(() => {
         setLoading(true)
         return mainApi.getMovies()
             .then((res) => {
-                    let filteredArray = res;
-                    filteredArray.filter(movie => movie.owner === currentUser.id);
-                    filteredArray.forEach(movie => {
-                        movie.savedMovie=true;
-                        movie.liked = true;
-                        movie.id = movie.movieId;
-                        movie.image = { url: movie.image.toString().replace(filmsUrl, '') };
-                        movie.trailerLink = movie.trailer;
-                    })
-                    if(filteredArray.length===0)
-                    {
-                        setFilmsNotFound(true);
-                    }
-                    return setMovies(filteredArray);
+                const lastUserId=localStorage.getItem('lastUserId');
+                const filteredArray = res.filter(movie => movie.owner === lastUserId);
+                res.forEach(movie => {
+                    movie.savedMovie = true;
+                    movie.liked = true;
+                    movie.id = movie.movieId;
+                    movie.image = { url: movie.image.toString().replace(filmsUrl, '') };
+                    movie.trailerLink = movie.trailer;
+                })
+                if (res.length === 0) {
+                    setFilmsNotFound(true);
+                }
+                setMovies(filteredArray)
             })
             .catch(err => props.onError(err))
             .finally(() => setLoading(false));
@@ -98,7 +97,7 @@ useEffect(()=>{
             <Header />
             <main className="saved-movies">
                 <Search onFormSubmit={handleSearchFilms} onCheckboxChange={handleCheckboxClick} />
-                {loading ? <Preloader /> : <MoviesCardList movies={filteredMovies}  onLikeClick={handleDislikeClick}/>}
+                {loading ? <Preloader /> : <MoviesCardList movies={filteredMovies} onLikeClick={handleDislikeClick} />}
                 {filmsNotFound && <FilmsNotFound />}
             </main>
             <Footer />
