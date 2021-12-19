@@ -14,7 +14,6 @@ import CurrentUserContext from '../../contexts/currentUserContext';
 function Movies(props) {
     const currentUser = useContext(CurrentUserContext);
     const [movies, setMovies] = useState([]);
-    const [savedMovies, setSavedMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [moviesCount, setMoviesCount] = useState(0);
     const [shortFilms, setShortFilms] = useState(false);
@@ -99,7 +98,7 @@ function Movies(props) {
         mainApi.getMovies()
             .then(res => {
                 if (localStorage.getItem('movies')) {
-                    const localMoviesArray=JSON.parse(localStorage.getItem('movies'))
+                    const localMoviesArray = JSON.parse(localStorage.getItem('movies'))
                     localMoviesArray.forEach((movie) => {
                         res.forEach((savedMovie) => {
                             if (movie.id === savedMovie.movieId && savedMovie.owner === currentUser.id) {
@@ -110,14 +109,7 @@ function Movies(props) {
                     })
                     setMovies(localMoviesArray);
                 }
-
-
-
-
-
-            }
-
-                )
+            })
             .catch(err => props.onError(err));
 
 
