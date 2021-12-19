@@ -7,7 +7,6 @@ function Card(props) {
         setLike(!like)
         props.onLikeClick(props.cardData)
     }
-
     useEffect(() => {
         props.cardData.liked = like;
     }, [like, props.cardData]);

@@ -29,8 +29,7 @@ function SavedMovies(props) {
             .then(() => {
                 const localMovies = JSON.parse(localStorage.getItem('movies'));
                 localMovies.forEach((movie) => {
-                    movie.test = false;
-                    if (movie._id === card._id) {
+                    if (movie.id === card.movieId) {
                         movie.liked = false;
                     }
                 })
