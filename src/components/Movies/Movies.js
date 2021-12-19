@@ -45,10 +45,10 @@ function Movies(props) {
         return setLoading(false)
     }
     const handleCardLikeClick = (card) => {
+        const cardsArray = filteredMovies;
         if (!card.liked) {
             mainApi.saveCard(card)
                 .then(res => {
-                    const cardsArray = filteredMovies;
                     cardsArray.forEach(movie => {
                         if (movie.id === res.movieId) {
                             card._id = res._id;
@@ -56,14 +56,25 @@ function Movies(props) {
                             movie.liked = card.liked;
                         }
                     })
-                    setMovies(cardsArray);
                 })
                 .catch(err => props.onError(err));
         }
+        else {
+            mainApi.deleteCard(card._id)
+                .then(res => {
+                    cardsArray.forEach(movie => {
+                        if (movie.id === res.movieId) {
+                            movie.liked = card.liked;
+                            card._id = null;
+                        }
+                    })
+                })
+                .catch(err => props.onError(err));
+        }
+        setMovies(cardsArray);
     }
 
     useEffect(() => {
-        let filteredArray = [];
         shortFilms
             ? filteredArray = movies
             : filteredArray = movies.filter(movie => movie.duration >= shortFilmDuration);
@@ -71,6 +82,7 @@ function Movies(props) {
             filteredArray.forEach((movie) => {
                 savedMovies.forEach((savedMovie) => {
                     if (movie.id === savedMovie.movieId && savedMovie.owner === currentUser.id) {
+                        movie._id=savedMovie._id;
                         movie.liked = true;
                     }
                 })
