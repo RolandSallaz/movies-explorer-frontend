@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import CurrentUserContext from "../../contexts/currentUserContext";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
@@ -8,7 +6,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
         console.log(false);
     }
     return (
-        loggedIn ? <Component {...props} /> : <Navigate to="/signin" />
+        loggedIn ? <Component {...props} /> : <Navigate to="/" />
     )
 }
 

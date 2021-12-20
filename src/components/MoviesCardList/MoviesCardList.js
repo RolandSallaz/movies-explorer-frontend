@@ -4,7 +4,10 @@ function MoviesCardList(props) {
     return (
         <section className='movies-cardList'>
             <ul className='movies-cardList__list'>
-                {props.filteredMovies.map(card => <Card key={card.id} cardData={card} />)}
+                {props.movies.map(card => <Card key={card.id}
+                    cardData={card}
+                    liked={card.liked}
+                    onLikeClick={props.onLikeClick} />)}
             </ul>
         </section>
     )

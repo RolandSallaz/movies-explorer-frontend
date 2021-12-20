@@ -53,6 +53,10 @@
   line-height: 17px;
   cursor: pointer;
 }
+.auth-form__submit-button:disabled {
+  cursor: default;
+  background-color: #2f2f2f;
+}
 .auth-form__error {
   margin: 0;
   margin-top: 10px;
