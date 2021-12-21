@@ -1,5 +1,6 @@
-# Фронт-енд часть диплома
+# about
+Данный проект является дипломной работой, и представляет из себя поисковик по фильмам с элементами регистрации/авторизации и бекенд.
 
-## Ссылка на домен фронт-енда
-
-Клик [https://api.diploma.roland.nomore.nomoredomains.work](https://api.diploma.roland.nomore.nomoredomains.work)
+## Проект собран и выложен:
+Ссылка на фронтенд [https://api.diploma.roland.nomore.nomoredomains.work](https://api.diploma.roland.nomore.nomoredomains.work)
+Ссылка на бекенд часть [https://github.com/RolandSallaz/movies-explorer-api](https://github.com/RolandSallaz/movies-explorer-api)
